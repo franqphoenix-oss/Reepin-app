@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useOrders } from "../context/OrderContext";
 import { useApp } from "../context/AppContext";
 
+import "./Dashboard.css";
+
 function getGreeting(hour) {
   if (hour >= 5 && hour < 12) {
     return "Good morning";

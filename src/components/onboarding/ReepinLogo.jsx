@@ -1,3 +1,5 @@
+import "./ReepinLogo.css";
+
 const ReepinLogo = () => {
   return (
     <div className="reepin-logo">

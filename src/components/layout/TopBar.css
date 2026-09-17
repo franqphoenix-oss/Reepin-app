@@ -1,0 +1,90 @@
+/* ================================
+   TOP BAR
+================================ */
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid var(--border);
+
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-button,
+.profile-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  border-radius: 50%;
+}
+
+.icon-button {
+  font-size: 20px;
+}
+
+.icon-button:hover,
+.profile-button:hover {
+  background: var(--background);
+}
+
+.profile-button {
+  background: #d9f2e5;
+
+  color: var(--primary-dark);
+
+  font-size: 12px;
+  font-weight: 700;
+}

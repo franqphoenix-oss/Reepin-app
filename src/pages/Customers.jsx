@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOrders } from "../context/OrderContext";
 
+import "./Customers.css";
+
 function Customers() {
   const navigate = useNavigate();
   const { orders } = useOrders();

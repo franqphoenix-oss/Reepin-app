@@ -1,0 +1,755 @@
+/* =========================================
+   ORDER DETAILS
+========================================= */
+
+.order-details-page {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 120px;
+}
+
+.order-details-header {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.order-details-header>div {
+  min-width: 0;
+}
+
+.order-details-header p {
+  margin: 0 0 3px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.order-details-header h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.order-details-back,
+.order-edit-button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.order-details-back {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0 0 5px 0;
+  font-size: 22px;
+}
+
+.order-edit-button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.order-summary-card {
+  padding: 20px;
+  margin-bottom: 28px;
+  border-radius: 22px;
+  background: var(--dark);
+  color: white;
+  box-shadow: 0 12px 30px rgba(7, 28, 25, 0.12);
+}
+
+.order-summary-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.order-detail-eyebrow {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+
+.order-summary-card h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.order-status-badge {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.order-summary-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+}
+
+.order-detail-section {
+  margin-bottom: 28px;
+}
+
+.order-detail-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.detail-section-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.order-detail-section-heading .section-eyebrow {
+  margin: 0 0 2px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.order-detail-section-heading h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.detail-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-row:last-child {
+  border-bottom: 0;
+}
+
+.detail-row>span {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.detail-row>strong {
+  text-align: right;
+  font-size: 14px;
+}
+
+.detail-row-column {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail-row-column>strong {
+  text-align: left;
+  line-height: 1.5;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.order-item-row strong {
+  font-size: 14px;
+}
+
+.order-item-row p {
+  margin: 5px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.order-item-row>strong {
+  white-space: nowrap;
+}
+
+.detail-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 16px;
+  background: var(--background);
+}
+
+.detail-total-row span {
+  font-weight: 600;
+}
+
+.detail-total-row strong {
+  font-size: 17px;
+}
+
+.notes-card {
+  padding: 16px;
+}
+
+.notes-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.order-detail-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.order-detail-actions button {
+  width: 100%;
+}
+
+.secondary-button {
+  min-height: 50px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.order-not-found {
+  padding: 48px 20px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+}
+
+.order-not-found-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: 16px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.order-not-found h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.order-not-found p {
+  max-width: 300px;
+  margin: 0 auto 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ================================
+   DELETE ORDER
+================================ */
+
+.delete-order-button {
+  width: 100%;
+  border: 1px solid rgba(220, 70, 70, 0.25);
+  background: rgba(220, 70, 70, 0.06);
+  color: #c62828;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.delete-order-button:hover {
+  background: rgba(220, 70, 70, 0.1);
+  border-color: rgba(220, 70, 70, 0.4);
+}
+
+.delete-order-button:active {
+  transform: scale(0.98);
+}
+
+
+/* ================================
+   DELETE CONFIRMATION
+================================ */
+
+.delete-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.delete-confirm-card {
+  width: 100%;
+  max-width: 440px;
+
+  padding: 24px;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+
+  text-align: center;
+
+  animation: deleteConfirmIn 0.2s ease-out;
+}
+
+.delete-confirm-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(220, 70, 70, 0.1);
+  color: #c62828;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.delete-confirm-card h2 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.delete-confirm-card p {
+  margin: 0 auto;
+
+  max-width: 340px;
+
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.delete-confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.delete-confirm-actions button {
+  width: 100%;
+}
+
+.delete-confirm-button {
+  border: none;
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  background: #c62828;
+  color: #ffffff;
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.delete-confirm-button:hover {
+  background: #b71c1c;
+}
+
+.delete-confirm-button:active {
+  transform: scale(0.98);
+}
+
+
+/* ================================
+   ANIMATION
+================================ */
+
+@keyframes deleteConfirmIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   ORDER STATUS
+================================ */
+
+.order-status-button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.order-status-button:active {
+  transform: scale(0.97);
+}
+
+
+/* ================================
+   STATUS OPTIONS CARD
+================================ */
+
+.status-options-card {
+  margin: 14px 0 8px;
+  padding: 18px;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+
+  animation: statusOptionsIn 0.2s ease-out;
+}
+
+.status-options-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 14px;
+}
+
+.status-options-header h2 {
+  margin: 3px 0 0;
+
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.status-options-close {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.05);
+  color: #555;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.status-options-close:active {
+  transform: scale(0.94);
+}
+
+
+/* ================================
+   STATUS OPTIONS
+================================ */
+
+.status-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-option {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 15px;
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
+
+  background: #fafafa;
+  color: #222;
+
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.status-option:hover {
+  background: #f4f4f4;
+}
+
+.status-option:active {
+  transform: scale(0.98);
+}
+
+.status-option.active {
+  border-color: rgba(0, 180, 110, 0.3);
+  background: rgba(0, 180, 110, 0.08);
+}
+
+.status-option.active span:last-child {
+  color: #00a86b;
+  font-size: 17px;
+}
+
+
+/* ================================
+   ANIMATION
+================================ */
+
+@keyframes statusOptionsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================================
+   PAYMENT UPDATE
+================================ */
+
+.payment-detail-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-payment-button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 13px 16px;
+  border: 1px solid rgba(18, 183, 106, 0.25);
+  border-radius: 14px;
+  background: rgba(18, 183, 106, 0.08);
+  color: #079455;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.update-payment-button:hover {
+  background: rgba(18, 183, 106, 0.13);
+  border-color: rgba(18, 183, 106, 0.4);
+}
+
+.update-payment-button:active {
+  transform: scale(0.98);
+}
+
+/* Payment modal */
+
+.payment-update-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.payment-update-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: paymentUpdateIn 0.2s ease-out;
+}
+
+.payment-update-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.payment-update-header h2 {
+  margin: 3px 0 0;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.payment-update-close {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  color: #555;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.payment-update-close:active {
+  transform: scale(0.94);
+}
+
+/* Outstanding balance */
+
+.payment-update-summary {
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #f5f7f8;
+}
+
+.payment-update-summary>div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.payment-update-summary span {
+  color: #667085;
+  font-size: 13px;
+}
+
+.payment-update-summary strong {
+  color: #101828;
+  font-size: 16px;
+}
+
+/* Payment input */
+
+.payment-update-field {
+  margin-bottom: 0;
+}
+
+.payment-update-field input {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.payment-update-field p {
+  margin: 7px 0 0;
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+/* Modal actions */
+
+.payment-update-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.payment-update-actions button {
+  width: 100%;
+}
+
+@keyframes paymentUpdateIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

@@ -1,0 +1,34 @@
+/* Actions */
+
+.primary-button {
+  width: 100%;
+  height: 54px;
+
+  border-radius: 15px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow: 0 10px 25px rgba(18, 183, 106, 0.2);
+
+  transition: 0.2s ease;
+}
+
+.primary-button:active {
+  transform: scale(0.98);
+}
+
+/* Sections */
+
+.section-eyebrow {
+  margin-bottom: 5px;
+
+  color: var(--text-muted);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}

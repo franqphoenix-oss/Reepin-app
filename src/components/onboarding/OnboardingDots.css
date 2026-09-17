@@ -1,0 +1,26 @@
+/* Dots */
+
+.onboarding-dots {
+  display: flex;
+  gap: 7px;
+
+  margin-top: 28px;
+  margin-bottom: 15px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #d0d5dd;
+}
+
+.dot.active {
+  width: 22px;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+}

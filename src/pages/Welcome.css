@@ -1,0 +1,158 @@
+/* ================================
+   WELCOME PAGE
+================================ */
+
+.welcome-page {
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 28px 20px calc(20px + env(safe-area-inset-bottom));
+
+  background:
+    radial-gradient(circle at 50% 35%,
+      rgba(18, 183, 106, 0.12),
+      transparent 34%),
+    var(--background);
+
+  text-align: center;
+}
+
+
+/* Content */
+
+.welcome-content {
+  max-width: 340px;
+}
+
+.welcome-eyebrow {
+  margin-bottom: 12px;
+
+  color: var(--primary-dark);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.welcome-content h1 {
+  font-size: clamp(32px, 9vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -1.4px;
+}
+
+.welcome-content h1 span {
+  color: var(--primary);
+}
+
+.welcome-description {
+  margin-top: 16px;
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+.welcome-actions {
+  width: 100%;
+  max-width: 380px;
+
+  margin-top: auto;
+}
+
+.login-link {
+  margin-top: 16px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+
+.login-link strong {
+  color: var(--primary-dark);
+}
+
+@media (max-width: 380px), (max-height: 700px) and (max-width: 430px) {
+  .welcome-page {
+    padding-inline: 16px;
+    padding-top: 20px;
+  }
+
+  .reepin-logo {
+    margin-top: 0;
+  }
+
+  .onboarding-illustration {
+    width: min(240px, 76vw);
+    height: clamp(160px, 27dvh, 190px);
+    margin-top: clamp(20px, 4dvh, 30px);
+    margin-bottom: clamp(14px, 3dvh, 24px);
+  }
+
+  .illustration-circle {
+    width: clamp(94px, 28vw, 112px);
+    height: clamp(94px, 28vw, 112px);
+    border-radius: 32px;
+    font-size: clamp(46px, 14vw, 54px);
+  }
+
+  .illustration-card {
+    width: clamp(58px, 19vw, 68px);
+    height: clamp(58px, 19vw, 68px);
+    border-radius: 17px;
+    font-size: clamp(21px, 7vw, 24px);
+  }
+
+  .card-one {
+    top: 0;
+    left: 7%;
+  }
+
+  .card-two {
+    right: 3%;
+    top: 28px;
+  }
+
+  .card-three {
+    bottom: 0;
+    left: 13%;
+  }
+
+  .welcome-content {
+    max-width: 320px;
+  }
+
+  .welcome-eyebrow {
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+
+  .welcome-content h1 {
+    font-size: clamp(30px, 9vw, 38px);
+  }
+
+  .welcome-description {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .onboarding-dots {
+    margin-top: 18px;
+    margin-bottom: 12px;
+  }
+
+  .primary-button {
+    height: 50px;
+  }
+
+  .login-link {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+}

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useOrders } from "../context/OrderContext";
 import { useApp } from "../context/AppContext";
 
+import "./FollowUps.css";
+
 const NOTIFICATION_STORAGE_KEY = "reepin_followup_notifications";
 
 function getFollowUpDate(date, time = "09:00") {

@@ -1,3 +1,5 @@
+import "./OnboardingDots.css";
+
 const OnboardingDots = () => {
   return (
     <div className="onboarding-dots">

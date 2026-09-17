@@ -1,3 +1,5 @@
+import "./OnboardingIllustration.css";
+
 const OnboardingIllustration = () => {
   return (
     <div className="onboarding-illustration">

@@ -1,3 +1,5 @@
+import "./TopBar.css";
+
 const TopBar = () => {
   return (
     <header className="top-bar">

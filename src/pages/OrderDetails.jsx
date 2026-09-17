@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useOrders } from "../context/OrderContext";
 
+import "./OrderDetails.css";
+
 function OrderDetails() {
   const navigate = useNavigate();
   const { orderId } = useParams();

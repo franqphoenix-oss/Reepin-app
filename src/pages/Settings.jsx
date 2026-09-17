@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useApp } from "../context/AppContext";
 
+import "./Settings.css";
+
 const Settings = () => {
   const navigate = useNavigate();
 

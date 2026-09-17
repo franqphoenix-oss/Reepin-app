@@ -1,0 +1,28 @@
+/* Logo */
+
+.reepin-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 10px;
+
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.reepin-logo span:first-child {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: var(--primary);
+  color: white;
+
+  box-shadow: 0 8px 20px rgba(18, 183, 106, 0.22);
+}

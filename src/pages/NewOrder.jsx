@@ -5,6 +5,8 @@ import { useOrders } from "../context/OrderContext";
 import { useApp } from "../context/AppContext";
 import { calculatePayment } from "../utils/orderHelpers";
 
+import "./NewOrder.css";
+
 function getNotifyAt(date, time, leadTime) {
   if (!date) {
     return "";
