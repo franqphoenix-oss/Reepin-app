@@ -1,4 +1,4 @@
-import "./OnboardingIllustration.css";
+import "../components-css/OnboardingIllustration.css";
 
 const OnboardingIllustration = () => {
   return (

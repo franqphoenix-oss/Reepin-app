@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import "./BottomNav.css";
+import "../components-css/BottomNav.css";
 
 function BottomNav() {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import "./AppShell.css";
+import "../components-css/AppShell.css";
 
 import TopBar from "./TopBar";
 import BottomNav from "./BottomNav";

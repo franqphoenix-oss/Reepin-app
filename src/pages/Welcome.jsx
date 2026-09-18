@@ -4,7 +4,7 @@ import ReepinLogo from "../components/onboarding/ReepinLogo";
 import OnboardingIllustration from "../components/onboarding/OnboardingIllustration";
 import OnboardingDots from "../components/onboarding/OnboardingDots";
 
-import "./Welcome.css";
+import "./pages-css/Welcome.css";
 
 function Welcome() {
   const navigate = useNavigate();

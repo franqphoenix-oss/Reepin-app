@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useOrders } from "../context/OrderContext";
 
-import "./OrderDetails.css";
+import "./pages-css/OrderDetails.css";
 
 function OrderDetails() {
   const navigate = useNavigate();

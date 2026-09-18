@@ -1,4 +1,4 @@
-import "./ReepinLogo.css";
+import "../components-css/ReepinLogo.css";
 
 const ReepinLogo = () => {
   return (

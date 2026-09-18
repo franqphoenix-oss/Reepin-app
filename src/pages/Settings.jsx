@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useApp } from "../context/AppContext";
 
-import "./Settings.css";
+import "./pages-css/Settings.css";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -596,7 +596,7 @@ const Settings = () => {
 
       <footer className="settings-footer">
         <strong>Reepin</strong>
-        <span>Version 1.0.0</span>
+        <span>Version 1.0.0 © franqphoenix</span>
       </footer>
     </main>
   );
