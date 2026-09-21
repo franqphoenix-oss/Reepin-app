@@ -114,15 +114,21 @@ function Dashboard() {
   );
 
   // Compare this month's sales with the previous month.
-  const monthSalesChange =
-    previousMonthSales > 0
-      ? ((totalSales - previousMonthSales) / previousMonthSales) * 100
-      : 0;
-
   const monthSalesChangeLabel =
-    previousMonthSales === 0 && totalSales > 0
-      ? "New"
+    previousMonthSales === 0
+      ? totalSales > 0
+        ? "New"
+        : "—"
       : (monthSalesChange >= 0 ? "+" : "") + monthSalesChange.toFixed(1) + "%";
+
+  const monthSalesChangeClass =
+    previousMonthSales === 0
+      ? totalSales > 0
+        ? "new"
+        : "neutral"
+      : monthSalesChange >= 0
+        ? "positive"
+        : "negative";
 
   // Orders with an active follow-up.
   const followUpCount = safeOrders.filter(
@@ -164,6 +170,7 @@ function Dashboard() {
         <button
           className="dashboard-profile"
           aria-label="Open settings"
+          onClick={() => navigate("/settings")}
           type="button"
         >
           {profileInitials}
@@ -183,7 +190,9 @@ function Dashboard() {
 
         <div className="overview-footer">
           <span>This month</span>
-          <strong>{monthSalesChangeLabel}</strong>
+          <strong className={`overview-change--${monthSalesChangeClass}`}>
+            {monthSalesChangeLabel}
+          </strong>
         </div>
       </section>
 

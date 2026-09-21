@@ -121,7 +121,20 @@
 }
 
 .overview-footer strong {
+  font-weight: 700;
+}
+
+.overview-footer strong.overview-change--positive,
+.overview-footer strong.overview-change--new {
   color: #7ce2af;
+}
+
+.overview-footer strong.overview-change--negative {
+  color: #fda29b;
+}
+
+.overview-footer strong.overview-change--neutral {
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* Stats */
