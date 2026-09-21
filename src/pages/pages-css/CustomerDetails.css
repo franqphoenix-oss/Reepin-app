@@ -312,23 +312,25 @@
 
 .customer-action-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 9px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     margin-bottom: 22px;
 }
 
 .customer-action {
     width: 100%;
-    min-height: 58px;
+    min-height: 96px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 11px 13px;
+    justify-content: center;
+    gap: 7px;
+    padding: 12px 7px;
     border: 1px solid #eaecf0;
     border-radius: 16px;
     background: #ffffff;
     color: #101828;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.035);
     cursor: pointer;
@@ -366,6 +368,7 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2px;
 }
 
@@ -378,7 +381,7 @@
 .customer-action small {
     overflow: hidden;
     color: #667085;
-    font-size: 10px;
+    font-size: 9px;
     line-height: 1.3;
     text-overflow: ellipsis;
     white-space: nowrap;
