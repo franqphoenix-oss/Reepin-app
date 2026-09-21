@@ -324,7 +324,7 @@ function OrderDetails() {
 
           <div className="detail-row">
             <span>Amount paid</span>
-            <strong>₦{amountPaid.toLocaleString()}</strong>
+            <strong>{formatCurrency(amountPaid, settings.currency)}</strong>
           </div>
 
           <div className="detail-row">
@@ -368,7 +368,7 @@ function OrderDetails() {
               <div>
                 <span>Outstanding balance</span>
 
-                <strong>₦{balance.toLocaleString()}</strong>
+                <strong>{formatCurrency(balance, settings.currency)}</strong>
               </div>
             </div>
 
