@@ -134,7 +134,6 @@ function Dashboard() {
 
         <button
           className="dashboard-profile"
-          onClick={() => navigate("/settings")}
           aria-label="Open settings"
           type="button"
         >

@@ -1,6 +1,9 @@
 import "../components-css/TopBar.css";
+import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="top-bar">
       <div className="brand">
@@ -13,7 +16,11 @@ const TopBar = () => {
           ♧
         </button>
 
-        <button className="profile-button" aria-label="Profile">
+        <button
+          className="profile-button"
+          aria-label="Profile"
+          onClick={() => navigate("/settings")}
+        >
           FP
         </button>
       </div>
