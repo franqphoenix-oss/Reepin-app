@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { useApp } from "../context/AppContext";
+import { formatCurrency } from "../utils/currency";
+
 import { useOrders } from "../context/OrderContext";
 
 import "./pages-css/OrderDetails.css";
@@ -8,6 +11,7 @@ import "./pages-css/OrderDetails.css";
 function OrderDetails() {
   const navigate = useNavigate();
   const { orderId } = useParams();
+  const { settings } = useApp();
 
   const { getOrderById, updateOrder, deleteOrder } = useOrders();
 
@@ -64,7 +68,10 @@ function OrderDetails() {
 
     if (newPayment > balance) {
       setPaymentError(
-        `Payment cannot be more than the outstanding balance of ₦${balance.toLocaleString()}.`,
+        `Payment cannot be more than the outstanding balance of ${formatCurrency(
+          balance,
+          settings.currency,
+        )}.`,
       );
       return;
     }
@@ -163,7 +170,7 @@ function OrderDetails() {
           <div>
             <p className="order-detail-eyebrow">ORDER #{order.id}</p>
 
-            <h2>₦{orderTotal.toLocaleString()}</h2>
+            <h2>{formatCurrency(orderTotal, settings.currency)}</h2>
           </div>
 
           <button
@@ -278,11 +285,13 @@ function OrderDetails() {
                     <strong>{item.name || "Unnamed item"}</strong>
 
                     <p>
-                      {quantity} × ₦{price.toLocaleString()}
+                      {quantity} × {formatCurrency(price, settings.currency)}
                     </p>
                   </div>
 
-                  <strong>₦{itemTotal.toLocaleString()}</strong>
+                  <strong>
+                    {formatCurrency(itemTotal, settings.currency)}
+                  </strong>
                 </div>
               );
             })
@@ -291,7 +300,7 @@ function OrderDetails() {
           <div className="detail-total-row">
             <span>Total</span>
 
-            <strong>₦{orderTotal.toLocaleString()}</strong>
+            <strong>{formatCurrency(orderTotal, settings.currency)}</strong>
           </div>
         </div>
       </section>
@@ -320,7 +329,7 @@ function OrderDetails() {
 
           <div className="detail-row">
             <span>Balance</span>
-            <strong>₦{balance.toLocaleString()}</strong>
+            <strong>{formatCurrency(balance, settings.currency)}</strong>
           </div>
 
           {balance > 0 && (
@@ -385,7 +394,9 @@ function OrderDetails() {
                 required
               />
 
-              <p>Maximum payment: ₦{balance.toLocaleString()}</p>
+              <p>
+                Maximum payment: {formatCurrency(balance, settings.currency)}
+              </p>
 
               {paymentError && <p className="payment-error">{paymentError}</p>}
             </div>

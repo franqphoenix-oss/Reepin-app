@@ -2,12 +2,15 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useOrders } from "../context/OrderContext";
+import { useApp } from "../context/AppContext";
+import { formatCurrency } from "../utils/currency";
 
 import "./pages-css/Orders.css";
 
 function Orders() {
   const navigate = useNavigate();
   const { orders } = useOrders();
+  const { settings } = useApp();
 
   const [activeFilter, setActiveFilter] = useState("All");
   const [search, setSearch] = useState("");
@@ -62,16 +65,6 @@ function Orders() {
 
   const hasOrders = safeOrders.length > 0;
   const hasMatches = filteredOrders.length > 0;
-
-  const formatCurrency = (amount) => {
-    const value = Number(amount);
-
-    if (!Number.isFinite(value)) {
-      return "₦0";
-    }
-
-    return `₦${value.toLocaleString()}`;
-  };
 
   const getCustomer = (order) => {
     if (typeof order?.customer === "string") {
@@ -238,7 +231,9 @@ function Orders() {
                 </div>
 
                 <div className="order-card-right">
-                  <strong>{formatCurrency(order.total)}</strong>
+                  <strong>
+                    {formatCurrency(order.total, settings.currency)}
+                  </strong>
 
                   <span>{order.status || "New"}</span>
 

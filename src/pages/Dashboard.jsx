@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useOrders } from "../context/OrderContext";
 import { useApp } from "../context/AppContext";
+import { formatCurrency } from "../utils/currency";
 
 import "./pages-css/Dashboard.css";
 
@@ -131,16 +132,6 @@ function Dashboard() {
   // Newest orders are stored first by OrderContext.
   const recentOrders = safeOrders.slice(0, 3);
 
-  const formatCurrency = (amount) => {
-    const value = Number(amount);
-
-    if (!Number.isFinite(value)) {
-      return "₦0";
-    }
-
-    return `₦${value.toLocaleString()}`;
-  };
-
   const getCustomerName = (order) => {
     if (typeof order?.customer === "string") {
       return order.customer || "Unnamed customer";
@@ -184,7 +175,7 @@ function Dashboard() {
           <div>
             <p>Total sales</p>
 
-            <h2>{formatCurrency(totalSales)}</h2>
+            <h2>{formatCurrency(totalSales, settings.currency)}</h2>
           </div>
 
           <span className="overview-icon">↗</span>
@@ -275,7 +266,9 @@ function Dashboard() {
                   </div>
 
                   <div className="dashboard-order-right">
-                    <strong>{formatCurrency(order?.total)}</strong>
+                    <strong>
+                      {formatCurrency(order?.total, settings.currency)}
+                    </strong>
 
                     <span>{order?.status || "New"}</span>
                   </div>

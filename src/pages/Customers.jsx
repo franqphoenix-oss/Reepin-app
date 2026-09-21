@@ -2,11 +2,15 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOrders } from "../context/OrderContext";
 
+import { useApp } from "../context/AppContext";
+import { formatCurrency } from "../utils/currency";
+
 import "./pages-css/Customers.css";
 
 function Customers() {
   const navigate = useNavigate();
   const { orders } = useOrders();
+  const { settings } = useApp();
 
   const safeOrders = Array.isArray(orders) ? orders : [];
 
@@ -110,16 +114,6 @@ function Customers() {
     });
   };
 
-  const formatCurrency = (amount) => {
-    const value = Number(amount);
-
-    if (!Number.isFinite(value)) {
-      return "₦0";
-    }
-
-    return `₦${value.toLocaleString()}`;
-  };
-
   return (
     <main className="customers-page">
       <header className="customers-header">
@@ -196,7 +190,9 @@ function Customers() {
                   <div>
                     <span>Total spent</span>
 
-                    <strong>{formatCurrency(customer.totalSpent)}</strong>
+                    <strong>
+                      {formatCurrency(customer.totalSpent, settings.currency)}
+                    </strong>
                   </div>
                 </div>
 

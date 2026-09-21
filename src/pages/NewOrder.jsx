@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { formatCurrency } from "../utils/currency";
+
 import { useOrders } from "../context/OrderContext";
 import { useApp } from "../context/AppContext";
 import { calculatePayment } from "../utils/orderHelpers";
@@ -468,17 +470,19 @@ function NewOrder() {
           <div className="payment-summary">
             <div>
               <span>Order total</span>
-              <strong>₦{total.toLocaleString()}</strong>
+              <strong>{formatCurrency(total, settings.currency)}</strong>
             </div>
 
             <div>
               <span>Amount paid</span>
-              <strong>₦{payment.amountPaid.toLocaleString()}</strong>
+              <strong>
+                {formatCurrency(payment.amountPaid, settings.currency)}
+              </strong>
             </div>
 
             <div>
               <span>Balance</span>
-              <strong>₦{balance.toLocaleString()}</strong>
+              <strong>{formatCurrency(balance, settings.currency)}</strong>
             </div>
           </div>
 
@@ -688,7 +692,7 @@ function NewOrder() {
         <div className="save-order-area">
           <div className="save-order-total">
             <span>Total</span>
-            <strong>₦{total.toLocaleString()}</strong>
+            <strong>{formatCurrency(total, settings.currency)}</strong>
           </div>
 
           <button type="submit" className="save-order-button">

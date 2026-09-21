@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useOrders } from "../context/OrderContext";
 import { useApp } from "../context/AppContext";
 
+import { formatCurrency as formatMoney } from "../utils/currency";
+
 import "./pages-css/FollowUps.css";
 
 const NOTIFICATION_STORAGE_KEY = "reepin_followup_notifications";
@@ -37,16 +39,6 @@ function formatDate(date, time) {
     hour: "numeric",
     minute: "2-digit",
   });
-}
-
-function formatCurrency(amount) {
-  const value = Number(amount);
-
-  if (!Number.isFinite(value)) {
-    return "₦0";
-  }
-
-  return `₦${value.toLocaleString()}`;
 }
 
 function getCustomerName(order) {
@@ -327,7 +319,8 @@ function FollowUps() {
             <strong>{getCustomerName(order)}</strong>
 
             <p>
-              Order #{order.id} · {formatCurrency(order.total)}
+              Order #{order.id} ·{" "}
+              {formatCurrency(order.total, settings.currency)}
             </p>
           </div>
 
