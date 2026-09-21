@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Orders from "./pages/Orders";
 import NewOrder from "./pages/NewOrder";
 
+import CustomerDetails from "./pages/CustomerDetails";
+
 import OrderDetails from "./pages/OrderDetails";
 import FollowUps from "./pages/FollowUps";
 import Customers from "./pages/Customers";
@@ -38,6 +40,11 @@ const App = () => {
               <Route path="/follow-ups" element={<FollowUps />} />
 
               <Route path="/customers" element={<Customers />} />
+
+              <Route
+                path="/customers/:customerId"
+                element={<CustomerDetails />}
+              />
 
               <Route path="/settings" element={<Settings />} />
 

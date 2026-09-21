@@ -201,15 +201,11 @@ function Customers() {
 
                   <button
                     type="button"
-                    onClick={() => {
-                      const latestOrder = customer.orders[0];
-
-                      if (latestOrder) {
-                        navigate(`/orders/${latestOrder.id}`);
-                      }
-                    }}
+                    onClick={() =>
+                      navigate(`/customers/${encodeURIComponent(customer.id)}`)
+                    }
                   >
-                    View order →
+                    View customer →
                   </button>
                 </div>
               </article>
