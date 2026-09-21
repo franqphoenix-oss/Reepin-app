@@ -85,9 +85,47 @@ function Dashboard() {
     0,
   );
 
+  // Orders created during the previous month.
+  const previousMonth =
+    currentDate.getMonth() === 0 ? 11 : currentDate.getMonth() - 1;
+
+  const previousMonthYear =
+    currentDate.getMonth() === 0
+      ? currentDate.getFullYear() - 1
+      : currentDate.getFullYear();
+
+  const previousMonthOrders = safeOrders.filter((order) => {
+    const orderDate = new Date(order?.createdAt);
+
+    if (Number.isNaN(orderDate.getTime())) {
+      return false;
+    }
+
+    return (
+      orderDate.getMonth() === previousMonth &&
+      orderDate.getFullYear() === previousMonthYear
+    );
+  });
+
+  const previousMonthSales = previousMonthOrders.reduce(
+    (sum, order) => sum + (Number(order?.total) || 0),
+    0,
+  );
+
+  // Compare this month's sales with the previous month.
+  const monthSalesChange =
+    previousMonthSales > 0
+      ? ((totalSales - previousMonthSales) / previousMonthSales) * 100
+      : 0;
+
+  const monthSalesChangeLabel =
+    previousMonthSales === 0 && totalSales > 0
+      ? "New"
+      : (monthSalesChange >= 0 ? "+" : "") + monthSalesChange.toFixed(1) + "%";
+
   // Orders with an active follow-up.
   const followUpCount = safeOrders.filter(
-    (order) => order?.followUp?.enabled,
+    (order) => order?.followUp?.enabled && !order?.followUp?.completed,
   ).length;
 
   // Newest orders are stored first by OrderContext.
@@ -154,7 +192,7 @@ function Dashboard() {
 
         <div className="overview-footer">
           <span>This month</span>
-          <strong>+0%</strong>
+          <strong>{monthSalesChangeLabel}</strong>
         </div>
       </section>
 
