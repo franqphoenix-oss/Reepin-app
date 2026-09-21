@@ -319,8 +319,7 @@ function FollowUps() {
             <strong>{getCustomerName(order)}</strong>
 
             <p>
-              Order #{order.id} ·{" "}
-              {formatCurrency(order.total, settings.currency)}
+              Order #{order.id} · {formatMoney(order.total, settings.currency)}
             </p>
           </div>
 
