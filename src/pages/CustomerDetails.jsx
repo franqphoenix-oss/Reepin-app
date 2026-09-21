@@ -114,6 +114,14 @@ function CustomerDetails() {
     return "Unpaid";
   };
 
+  const getWhatsAppNumber = (phone) => {
+    if (!phone) {
+      return "";
+    }
+
+    return phone.replace(/\D/g, "").replace(/^0/, "234");
+  };
+
   if (!customer) {
     return (
       <main className="customer-details-page">
@@ -147,6 +155,8 @@ function CustomerDetails() {
     );
   }
 
+  const whatsappNumber = getWhatsAppNumber(customer.phone);
+
   return (
     <main className="customer-details-page">
       <button
@@ -170,6 +180,49 @@ function CustomerDetails() {
           <p>{customer.phone || "No phone number"}</p>
         </div>
       </header>
+
+      {/* Customer actions */}
+      <section className="customer-action-grid">
+        <button
+          type="button"
+          className="customer-action customer-action-primary"
+          onClick={() => navigate("/orders/new")}
+        >
+          <span className="customer-action-icon">+</span>
+
+          <span>
+            <strong>New order</strong>
+            <small>Record an order</small>
+          </span>
+        </button>
+
+        {customer.phone && (
+          <a className="customer-action" href={`tel:${customer.phone}`}>
+            <span className="customer-action-icon">☎</span>
+
+            <span>
+              <strong>Call</strong>
+              <small>{customer.phone}</small>
+            </span>
+          </a>
+        )}
+
+        {whatsappNumber && (
+          <a
+            className="customer-action"
+            href={`https://wa.me/${whatsappNumber}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="customer-action-icon">◉</span>
+
+            <span>
+              <strong>WhatsApp</strong>
+              <small>Message customer</small>
+            </span>
+          </a>
+        )}
+      </section>
 
       <section className="customer-summary-grid">
         <article>
