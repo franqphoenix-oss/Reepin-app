@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useApp } from "../context/AppContext";
+import { useApp } from "../context/useApp";
 import { formatCurrency } from "../utils/currency";
 
-import { useOrders } from "../context/OrderContext";
+import { useOrders } from "../context/useOrders";
 
 import "./pages-css/OrderDetails.css";
 

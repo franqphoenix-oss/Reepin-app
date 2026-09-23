@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import { calculatePayment, normalizeOrder } from "../utils/orderHelpers";
 
-const OrderContext = createContext();
+export const OrderContext = createContext();
 
 const STORAGE_KEY = "reepin_orders";
 
@@ -112,8 +112,4 @@ export function OrderProvider({ children }) {
       {children}
     </OrderContext.Provider>
   );
-}
-
-export function useOrders() {
-  return useContext(OrderContext);
 }

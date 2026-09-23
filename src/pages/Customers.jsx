@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useOrders } from "../context/OrderContext";
 
-import { useApp } from "../context/AppContext";
+import { useOrders } from "../context/useOrders";
+import { useApp } from "../context/useApp";
 import { formatCurrency } from "../utils/currency";
+import { buildCustomersFromOrders } from "../utils/customerHelpers";
 
 import "./pages-css/Customers.css";
 
@@ -12,89 +13,9 @@ function Customers() {
   const { orders } = useOrders();
   const { settings } = useApp();
 
-  const safeOrders = Array.isArray(orders) ? orders : [];
-
   const customers = useMemo(() => {
-    const customerMap = new Map();
-
-    safeOrders.forEach((order) => {
-      if (!order || typeof order !== "object") {
-        return;
-      }
-
-      const rawCustomer = order.customer;
-
-      const name =
-        typeof rawCustomer === "string"
-          ? rawCustomer.trim()
-          : rawCustomer?.name?.trim() || "";
-
-      if (!name) {
-        return;
-      }
-
-      const phone =
-        typeof rawCustomer === "string" ? "" : rawCustomer?.phone?.trim() || "";
-
-      /*
-       * Prefer the phone number as the unique identifier.
-       * If there is no phone number, fall back to the customer's name.
-       */
-      const key = phone || name.toLowerCase();
-
-      if (!customerMap.has(key)) {
-        customerMap.set(key, {
-          id: key,
-          name,
-          phone,
-          orders: [],
-          totalSpent: 0,
-          lastOrderDate: order.createdAt || "",
-        });
-      }
-
-      const customer = customerMap.get(key);
-
-      customer.orders.push(order);
-      customer.totalSpent += Number(order.total) || 0;
-
-      /*
-       * Keep the most recent order date.
-       */
-      const currentOrderDate = new Date(order.createdAt);
-      const lastOrderDate = new Date(customer.lastOrderDate);
-
-      if (
-        !Number.isNaN(currentOrderDate.getTime()) &&
-        (Number.isNaN(lastOrderDate.getTime()) ||
-          currentOrderDate > lastOrderDate)
-      ) {
-        customer.lastOrderDate = order.createdAt;
-      }
-
-      /*
-       * If an older order had no phone number but a newer
-       * order does, keep the available phone number.
-       */
-      if (!customer.phone && phone) {
-        customer.phone = phone;
-      }
-    });
-
-    return Array.from(customerMap.values())
-      .map((customer) => ({
-        ...customer,
-
-        /*
-         * Make the customer's newest order first.
-         * This guarantees "View order" opens the latest one.
-         */
-        orders: [...customer.orders].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-        ),
-      }))
-      .sort((a, b) => new Date(b.lastOrderDate) - new Date(a.lastOrderDate));
-  }, [safeOrders]);
+    return buildCustomersFromOrders(orders);
+  }, [orders]);
 
   const formatDate = (date) => {
     if (!date) {

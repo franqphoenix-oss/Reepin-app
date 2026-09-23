@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { formatCurrency } from "../utils/currency";
 
-import { useOrders } from "../context/OrderContext";
-import { useApp } from "../context/AppContext";
+import { useOrders } from "../context/useOrders";
+import { useApp } from "../context/useApp";
 import { calculatePayment } from "../utils/orderHelpers";
 
 import "./pages-css/NewOrder.css";
@@ -59,7 +59,7 @@ function NewOrder() {
 
   const [items, setItems] = useState([
     {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       name: "",
       quantity: 1,
       price: "",
@@ -297,7 +297,7 @@ function NewOrder() {
     }
 
     const newOrder = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       ...orderData,
       status: "New",
       createdAt: new Date().toISOString(),

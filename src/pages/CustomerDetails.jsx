@@ -1,87 +1,29 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useOrders } from "../context/OrderContext";
-import { useApp } from "../context/AppContext";
+import { useOrders } from "../context/useOrders";
+import { useApp } from "../context/useApp";
 import { formatCurrency } from "../utils/currency";
+import { buildCustomersFromOrders } from "../utils/customerHelpers";
 
 import "./pages-css/CustomerDetails.css";
 
 function CustomerDetails() {
   const navigate = useNavigate();
   const { customerId } = useParams();
+
   const { orders } = useOrders();
   const { settings } = useApp();
 
   const customer = useMemo(() => {
     const decodedId = decodeURIComponent(customerId || "");
-    const safeOrders = Array.isArray(orders) ? orders : [];
 
-    const customerOrders = [];
+    const customers = buildCustomersFromOrders(orders);
 
-    let name = "";
-    let phone = "";
-
-    safeOrders.forEach((order) => {
-      if (!order || typeof order !== "object") {
-        return;
-      }
-
-      const rawCustomer = order.customer;
-
-      const orderName =
-        typeof rawCustomer === "string"
-          ? rawCustomer.trim()
-          : rawCustomer?.name?.trim() || "";
-
-      if (!orderName) {
-        return;
-      }
-
-      const orderPhone =
-        typeof rawCustomer === "string" ? "" : rawCustomer?.phone?.trim() || "";
-
-      const key = orderPhone || orderName.toLowerCase();
-
-      if (key !== decodedId) {
-        return;
-      }
-
-      if (!name) {
-        name = orderName;
-      }
-
-      if (!phone && orderPhone) {
-        phone = orderPhone;
-      }
-
-      customerOrders.push(order);
-    });
-
-    customerOrders.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    return (
+      customers.find((existingCustomer) => existingCustomer.id === decodedId) ||
+      null
     );
-
-    if (!name) {
-      return null;
-    }
-
-    return {
-      id: decodedId,
-      name,
-      phone,
-      orders: customerOrders,
-
-      totalSpent: customerOrders.reduce(
-        (sum, order) => sum + (Number(order.total) || 0),
-        0,
-      ),
-
-      outstandingBalance: customerOrders.reduce(
-        (sum, order) => sum + (Number(order.balance) || 0),
-        0,
-      ),
-    };
   }, [customerId, orders]);
 
   const formatDate = (date) => {
@@ -119,7 +61,17 @@ function CustomerDetails() {
       return "";
     }
 
-    return phone.replace(/\D/g, "").replace(/^0/, "234");
+    const digits = phone.replace(/\D/g, "");
+
+    if (digits.startsWith("234")) {
+      return digits;
+    }
+
+    if (digits.startsWith("0")) {
+      return `234${digits.slice(1)}`;
+    }
+
+    return digits;
   };
 
   if (!customer) {
@@ -181,7 +133,6 @@ function CustomerDetails() {
         </div>
       </header>
 
-      {/* Customer actions */}
       <section className="customer-action-grid">
         <button
           type="button"
@@ -227,6 +178,7 @@ function CustomerDetails() {
       <section className="customer-summary-grid">
         <article>
           <span>Total orders</span>
+
           <strong>{customer.orders.length}</strong>
         </article>
 

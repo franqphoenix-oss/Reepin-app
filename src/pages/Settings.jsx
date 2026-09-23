@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useApp } from "../context/AppContext";
+import { useApp } from "../context/useApp";
 import { CURRENCY_OPTIONS, getCurrencyName } from "../utils/currency";
 
 import { getProfileInitials } from "../utils/profile";

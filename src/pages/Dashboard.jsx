@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useOrders } from "../context/OrderContext";
-import { useApp } from "../context/AppContext";
+import { useOrders } from "../context/useOrders";
+import { useApp } from "../context/useApp";
 import { formatCurrency } from "../utils/currency";
 
 import "./pages-css/Dashboard.css";
@@ -23,20 +23,6 @@ function getGreeting(hour) {
   return "How's it Going";
 }
 
-function getInitials(name) {
-  if (!name?.trim()) {
-    return "FP";
-  }
-
-  const parts = name.trim().split(/\s+/);
-
-  if (parts.length === 1) {
-    return parts[0].slice(0, 2).toUpperCase();
-  }
-
-  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-}
-
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -48,8 +34,6 @@ function Dashboard() {
   );
 
   const safeOrders = Array.isArray(orders) ? orders : [];
-
-  const profileName = settings?.profile?.name || "Franq Phoenix";
 
   useEffect(() => {
     const updateGreeting = () => {

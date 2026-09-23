@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
 const STORAGE_KEY = "reepin_app_settings";
 
@@ -138,8 +138,4 @@ export function AppProvider({ children }) {
       {children}
     </AppContext.Provider>
   );
-}
-
-export function useApp() {
-  return useContext(AppContext);
 }

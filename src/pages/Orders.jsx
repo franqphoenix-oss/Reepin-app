@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useOrders } from "../context/OrderContext";
-import { useApp } from "../context/AppContext";
+import { useOrders } from "../context/useOrders";
+import { useApp } from "../context/useApp";
 import { formatCurrency } from "../utils/currency";
 
 import "./pages-css/Orders.css";
@@ -17,9 +17,9 @@ function Orders() {
 
   const filters = ["All", "New", "Processing", "Delivered"];
 
-  const safeOrders = Array.isArray(orders) ? orders : [];
-
   const filteredOrders = useMemo(() => {
+    const safeOrders = Array.isArray(orders) ? orders : [];
+
     const query = search.trim().toLowerCase();
 
     return safeOrders.filter((order) => {

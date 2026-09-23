@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useOrders } from "../context/OrderContext";
-import { useApp } from "../context/AppContext";
+import { useOrders } from "../context/useOrders";
+import { useApp } from "../context/useApp";
 
 import { formatCurrency as formatMoney } from "../utils/currency";
 
@@ -98,9 +98,9 @@ function FollowUps() {
   const { orders, updateOrder } = useOrders();
   const { settings } = useApp();
 
-  const safeOrders = Array.isArray(orders) ? orders : [];
-
   const followUps = useMemo(() => {
+    const safeOrders = Array.isArray(orders) ? orders : [];
+
     return safeOrders.filter(
       (order) =>
         order &&

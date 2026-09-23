@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { useApp } from "../../context/AppContext";
+import { useApp } from "../../context/useApp";
 import { getProfileInitials } from "../../utils/profile";
 
 import "../components-css/TopBar.css";
