@@ -237,8 +237,19 @@ function CustomerDetails() {
 
                 <div className="customer-order-bottom">
                   <span>
-                    {Array.isArray(order.items) ? order.items.length : 0}{" "}
-                    {Array.isArray(order.items) && order.items.length === 1
+                    {Array.isArray(order.items)
+                      ? order.items.reduce(
+                          (totalQuantity, item) =>
+                            totalQuantity + (Number(item?.quantity) || 0),
+                          0,
+                        )
+                      : 0}{" "}
+                    {Array.isArray(order.items) &&
+                    order.items.reduce(
+                      (totalQuantity, item) =>
+                        totalQuantity + (Number(item?.quantity) || 0),
+                      0,
+                    ) === 1
                       ? "item"
                       : "items"}
                   </span>

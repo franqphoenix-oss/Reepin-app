@@ -6,7 +6,7 @@ const STORAGE_KEY = "reepin_app_settings";
 
 const defaultSettings = {
   profile: {
-    name: "Franq Phoenix",
+    name: "",
     role: "Business owner",
   },
 
