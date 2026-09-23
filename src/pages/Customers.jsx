@@ -167,7 +167,14 @@ function Customers() {
 
           <div className="customers-list">
             {customers.map((customer) => (
-              <article className="customer-card" key={customer.id}>
+              <button
+                className="customer-card"
+                key={customer.id}
+                onClick={() =>
+                  navigate(`/customers/${encodeURIComponent(customer.id)}`)
+                }
+                type="button"
+              >
                 <div className="customer-card-main">
                   <div className="customer-avatar">
                     {customer.name.charAt(0).toUpperCase()}
@@ -199,16 +206,9 @@ function Customers() {
                 <div className="customer-card-footer">
                   <span>Last order: {formatDate(customer.lastOrderDate)}</span>
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      navigate(`/customers/${encodeURIComponent(customer.id)}`)
-                    }
-                  >
-                    View customer →
-                  </button>
+                  <p className="customer-card-footer-btn">View customer →</p>
                 </div>
-              </article>
+              </button>
             ))}
           </div>
         </section>

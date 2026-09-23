@@ -209,7 +209,8 @@
   white-space: nowrap;
 }
 
-.customer-card-footer button {
+
+.customer-card-footer-btn {
   flex-shrink: 0;
   padding: 5px 0;
   border: none;

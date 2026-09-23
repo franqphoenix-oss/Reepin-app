@@ -36,15 +36,6 @@
     background: var(--background);
     box-shadow: 0 0 40px rgba(16, 24, 40, 0.08);
   }
-
-  .top-bar,
-  .bottom-nav {
-    left: 50%;
-    right: auto;
-    width: 100%;
-    max-width: 480px;
-    transform: translateX(-50%);
-  }
 }
 
 @media (max-width: 359px) {

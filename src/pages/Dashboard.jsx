@@ -114,6 +114,11 @@ function Dashboard() {
   );
 
   // Compare this month's sales with the previous month.
+  const monthSalesChange =
+    previousMonthSales > 0
+      ? ((totalSales - previousMonthSales) / previousMonthSales) * 100
+      : 0;
+
   const monthSalesChangeLabel =
     previousMonthSales === 0
       ? totalSales > 0
