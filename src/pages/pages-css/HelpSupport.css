@@ -1,0 +1,141 @@
+.help-support-page {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 8px 20px calc(110px + env(safe-area-inset-bottom));
+}
+
+.help-support-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 26px;
+}
+
+.help-support-header h1 {
+    margin-top: 3px;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.help-support-back {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 20px;
+}
+
+.help-support-intro {
+    display: flex;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.05);
+}
+
+.help-support-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 800;
+}
+
+.help-support-intro h2 {
+    font-size: 15px;
+}
+
+.help-support-intro p {
+    margin-top: 5px;
+    color: var(--secondary);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.help-support-section {
+    margin-top: 28px;
+}
+
+.help-support-card {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.help-support-card article {
+    padding: 16px;
+}
+
+.help-support-card article+article {
+    border-top: 1px solid #f2f4f7;
+}
+
+.help-support-card h3 {
+    color: var(--text);
+    font-size: 13px;
+}
+
+.help-support-card article p {
+    margin-top: 6px;
+    color: var(--secondary);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+.help-support-app-info {
+    padding: 17px;
+}
+
+.help-support-app-info>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.help-support-app-info strong {
+    color: var(--primary-dark);
+    font-size: 14px;
+}
+
+.help-support-app-info span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.help-support-app-info>p {
+    margin-top: 10px;
+    color: var(--secondary);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+@media (max-width: 360px) {
+    .help-support-page {
+        padding-inline: 14px;
+    }
+
+    .help-support-intro {
+        padding: 15px;
+    }
+
+    .help-support-card article {
+        padding: 14px;
+    }
+}

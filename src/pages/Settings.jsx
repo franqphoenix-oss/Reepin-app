@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useApp } from "../context/AppContext";
+import { CURRENCY_OPTIONS, getCurrencyName } from "../utils/currency";
+
+import { getProfileInitials } from "../utils/profile";
 
 import "./pages-css/Settings.css";
 
@@ -44,6 +47,24 @@ const Settings = () => {
   const [defaultLeadTime, setDefaultLeadTime] = useState(
     settings.notifications.defaultLeadTime,
   );
+
+  const profileInitials = getProfileInitials(settings.profile?.name);
+
+  useEffect(() => {
+    setProfileName(settings.profile.name);
+    setProfileRole(settings.profile.role);
+
+    setBusinessName(settings.business.name);
+    setBusinessPhone(settings.business.phone);
+    setBusinessAddress(settings.business.address);
+
+    setSelectedCurrency(settings.currency);
+
+    setNotificationEnabled(settings.notifications.enabled);
+    setNotificationType(settings.notifications.type);
+    setNotificationFrequency(settings.notifications.frequency);
+    setDefaultLeadTime(settings.notifications.defaultLeadTime);
+  }, [settings]);
 
   // ---------------------------------------------------------
   // PROFILE
@@ -202,7 +223,7 @@ const Settings = () => {
               className="settings-list-item"
               onClick={handleEditProfile}
             >
-              <div className="settings-item-icon">FP</div>
+              <div className="settings-item-icon">{profileInitials}</div>
 
               <div className="settings-item-content">
                 <strong>{settings.profile.name}</strong>
@@ -218,7 +239,7 @@ const Settings = () => {
             onSubmit={handleSaveProfile}
           >
             <div className="settings-profile-edit-header">
-              <div className="settings-item-icon">FP</div>
+              <div className="settings-item-icon">{profileInitials}</div>
 
               <div>
                 <strong>Edit profile</strong>
@@ -301,15 +322,13 @@ const Settings = () => {
               className="settings-list-item"
               onClick={handleEditCurrency}
             >
-              <div className="settings-item-icon">₦</div>
+              <div className="settings-item-icon">{settings.currency}</div>
 
               <div className="settings-item-content">
                 <strong>Currency</strong>
 
                 <span>
-                  {settings.currency === "₦"
-                    ? "Nigerian Naira (₦)"
-                    : settings.currency}
+                  {getCurrencyName(settings.currency)} ({settings.currency})
                 </span>
               </div>
 
@@ -388,7 +407,7 @@ const Settings = () => {
             onSubmit={handleSaveCurrency}
           >
             <div className="settings-business-edit-header">
-              <div className="settings-item-icon">₦</div>
+              <div className="settings-item-icon">{selectedCurrency}</div>
 
               <div>
                 <strong>Currency</strong>
@@ -405,13 +424,11 @@ const Settings = () => {
                 value={selectedCurrency}
                 onChange={(event) => setSelectedCurrency(event.target.value)}
               >
-                <option value="₦">Nigerian Naira (₦)</option>
-
-                <option value="$">US Dollar ($)</option>
-
-                <option value="£">British Pound (£)</option>
-
-                <option value="€">Euro (€)</option>
+                {CURRENCY_OPTIONS.map((currency) => (
+                  <option key={currency.symbol} value={currency.symbol}>
+                    {currency.name} ({currency.symbol})
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -562,6 +579,32 @@ const Settings = () => {
             </div>
           </form>
         )}
+      </section>
+
+      {/* =====================================================
+    SUPPORT
+===================================================== */}
+
+      <section className="settings-section">
+        <p className="settings-section-label">SUPPORT</p>
+
+        <div className="settings-list-card">
+          <button
+            type="button"
+            className="settings-list-item"
+            onClick={() => navigate("/help-support")}
+          >
+            <div className="settings-item-icon">?</div>
+
+            <div className="settings-item-content">
+              <strong>Help & Support</strong>
+
+              <span>Learn how to use Reepin and find answers.</span>
+            </div>
+
+            <span className="settings-item-arrow">›</span>
+          </button>
+        </div>
       </section>
 
       {/* =====================================================

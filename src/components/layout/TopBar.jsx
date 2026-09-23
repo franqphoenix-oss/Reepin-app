@@ -1,8 +1,15 @@
-import "../components-css/TopBar.css";
 import { useNavigate } from "react-router-dom";
+
+import { useApp } from "../../context/AppContext";
+import { getProfileInitials } from "../../utils/profile";
+
+import "../components-css/TopBar.css";
 
 const TopBar = () => {
   const navigate = useNavigate();
+  const { settings } = useApp();
+
+  const profileInitials = getProfileInitials(settings.profile?.name);
 
   return (
     <header className="top-bar">
@@ -12,16 +19,13 @@ const TopBar = () => {
       </div>
 
       <div className="top-bar-actions">
-        <button className="icon-button" aria-label="Notifications">
-          ♧
-        </button>
-
         <button
+          type="button"
           className="profile-button"
-          aria-label="Profile"
+          aria-label="Open settings"
           onClick={() => navigate("/settings")}
         >
-          FP
+          {profileInitials}
         </button>
       </div>
     </header>

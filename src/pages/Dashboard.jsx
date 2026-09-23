@@ -50,7 +50,6 @@ function Dashboard() {
   const safeOrders = Array.isArray(orders) ? orders : [];
 
   const profileName = settings?.profile?.name || "Franq Phoenix";
-  const profileInitials = getInitials(profileName);
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -171,15 +170,6 @@ function Dashboard() {
 
           <h1>Here's your business.</h1>
         </div>
-
-        <button
-          className="dashboard-profile"
-          aria-label="Open settings"
-          onClick={() => navigate("/settings")}
-          type="button"
-        >
-          {profileInitials}
-        </button>
       </section>
 
       <section className="overview-card">

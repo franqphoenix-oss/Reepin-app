@@ -12,6 +12,7 @@ import OrderDetails from "./pages/OrderDetails";
 import FollowUps from "./pages/FollowUps";
 import Customers from "./pages/Customers";
 import Settings from "./pages/Settings";
+import HelpSupport from "./pages/HelpSupport";
 
 import AppShell from "./components/layout/AppShell";
 
@@ -47,6 +48,8 @@ const App = () => {
               />
 
               <Route path="/settings" element={<Settings />} />
+
+              <Route path="/help-support" element={<HelpSupport />} />
 
               <Route path="/orders/:orderId/edit" element={<NewOrder />} />
             </Route>
