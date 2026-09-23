@@ -75,25 +75,27 @@ export const normalizeOrder = (order) => {
   const customer =
     typeof safeOrder.customer === "string"
       ? {
-          name: safeOrder.customer,
+          name: safeOrder.customer.trim(),
           phone: "",
         }
       : {
-          name: safeOrder.customer?.name || "",
-          phone: safeOrder.customer?.phone || "",
+          name: safeOrder.customer?.name?.trim() || "",
+          phone: safeOrder.customer?.phone?.trim() || "",
         };
 
   const items = Array.isArray(safeOrder.items)
     ? safeOrder.items.map((item, index) => ({
         id: item?.id ?? `${safeOrder.id || "item"}-${index}`,
-        name: item?.name || "",
-        quantity: Number(item?.quantity) || 1,
-        price: Number(item?.price) || 0,
+        name: item?.name?.trim() || "",
+        quantity: Math.max(Number(item?.quantity) || 1, 1),
+        price: Math.max(Number(item?.price) || 0, 0),
       }))
     : [];
 
-  const total = Number(safeOrder.total) || 0;
-  const amountPaid = Number(safeOrder.amountPaid) || 0;
+  const total = Math.max(Number(safeOrder.total) || 0, 0);
+  const amountPaid = Math.max(Number(safeOrder.amountPaid) || 0, 0);
+
+  const payment = calculatePayment(total, amountPaid);
 
   return {
     ...createEmptyOrder(),
@@ -104,16 +106,10 @@ export const normalizeOrder = (order) => {
 
     items,
 
-    total,
-
-    amountPaid,
-
-    balance: Math.max(total - amountPaid, 0),
-
-    paymentStatus: safeOrder.paymentStatus || "Unpaid",
+    ...payment,
 
     delivery: {
-      address: safeOrder.delivery?.address || "",
+      address: safeOrder.delivery?.address?.trim() || "",
       status: safeOrder.delivery?.status || "Pending",
     },
 
@@ -127,7 +123,7 @@ export const normalizeOrder = (order) => {
       completed: Boolean(safeOrder.followUp?.completed),
     },
 
-    notes: safeOrder.notes || "",
+    notes: safeOrder.notes?.trim() || "",
 
     status: safeOrder.status || "New",
 

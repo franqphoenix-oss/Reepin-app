@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { OrderContext } from "./OrderContextValue";
-import { calculatePayment, normalizeOrder } from "../utils/orderHelpers";
+import { normalizeOrder } from "../utils/orderHelpers";
 
 const STORAGE_KEY = "reepin_orders";
 
@@ -20,17 +20,7 @@ export function OrderProvider({ children }) {
         return [];
       }
 
-      return parsedOrders.map((order) => {
-        const normalizedOrder = normalizeOrder(order);
-
-        return {
-          ...normalizedOrder,
-          ...calculatePayment(
-            normalizedOrder.total,
-            normalizedOrder.amountPaid,
-          ),
-        };
-      });
+      return parsedOrders.map(normalizeOrder);
     } catch (error) {
       console.error("Failed to load saved orders:", error);
 
@@ -49,18 +39,7 @@ export function OrderProvider({ children }) {
   const addOrder = (order) => {
     const normalizedOrder = normalizeOrder(order);
 
-    const payment = calculatePayment(
-      normalizedOrder.total,
-      normalizedOrder.amountPaid,
-    );
-
-    setOrders((currentOrders) => [
-      {
-        ...normalizedOrder,
-        ...payment,
-      },
-      ...currentOrders,
-    ]);
+    setOrders((currentOrders) => [normalizedOrder, ...currentOrders]);
   };
 
   const updateOrder = (id, updates) => {
@@ -70,20 +49,10 @@ export function OrderProvider({ children }) {
           return order;
         }
 
-        const updatedOrder = normalizeOrder({
+        return normalizeOrder({
           ...order,
           ...updates,
         });
-
-        const payment = calculatePayment(
-          updatedOrder.total,
-          updatedOrder.amountPaid,
-        );
-
-        return {
-          ...updatedOrder,
-          ...payment,
-        };
       }),
     );
   };

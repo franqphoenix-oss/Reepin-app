@@ -40,6 +40,58 @@ export const getCustomerIdentity = (customer) => {
   };
 };
 
+const findMatchingCustomer = (customers, identity) => {
+  if (identity.normalizedPhone) {
+    const phoneMatch = customers.find(
+      (customer) => customer.normalizedPhone === identity.normalizedPhone,
+    );
+
+    if (phoneMatch) {
+      return phoneMatch;
+    }
+  }
+
+  /*
+   * When there is no phone number, a name match is only safe
+   * when exactly one customer has that normalized name.
+   *
+   * This prevents:
+   *
+   * John + 08011111111
+   * John + 08022222222
+   *
+   * from being merged into one customer just because a later
+   * order contains "John" without a phone number.
+   */
+  if (identity.normalizedName) {
+    const nameMatches = customers.filter(
+      (customer) => customer.normalizedName === identity.normalizedName,
+    );
+
+    if (nameMatches.length === 1) {
+      return nameMatches[0];
+    }
+
+    /*
+     * If there is an existing name-only customer and no
+     * conflicting phone-based customers, reuse it.
+     */
+    if (nameMatches.length === 0) {
+      return null;
+    }
+
+    const nameOnlyMatch = nameMatches.find(
+      (customer) => !customer.normalizedPhone,
+    );
+
+    if (nameOnlyMatch) {
+      return nameOnlyMatch;
+    }
+  }
+
+  return null;
+};
+
 export const buildCustomersFromOrders = (orders = []) => {
   const safeOrders = Array.isArray(orders) ? orders : [];
   const customers = [];
@@ -55,50 +107,8 @@ export const buildCustomersFromOrders = (orders = []) => {
       return;
     }
 
-    let customer = null;
+    let customer = findMatchingCustomer(customers, identity);
 
-    /*
-     * First preference:
-     * exact phone-number match.
-     */
-    if (identity.normalizedPhone) {
-      customer = customers.find(
-        (existing) => existing.normalizedPhone === identity.normalizedPhone,
-      );
-    }
-
-    /*
-     * If this order has no phone, use the customer's name.
-     */
-    if (!customer && !identity.normalizedPhone) {
-      customer = customers.find(
-        (existing) =>
-          !existing.normalizedPhone &&
-          existing.normalizedName === identity.normalizedName,
-      );
-    }
-
-    /*
-     * If an older record had only a name and a newer order
-     * provides a phone number, connect the two records when
-     * the names match.
-     */
-    if (!customer && identity.normalizedPhone) {
-      const nameMatches = customers.filter(
-        (existing) =>
-          !existing.normalizedPhone &&
-          existing.normalizedName === identity.normalizedName,
-      );
-
-      if (nameMatches.length === 1) {
-        customer = nameMatches[0];
-      }
-    }
-
-    /*
-     * If a customer already exists by phone but their name
-     * changed, keep the newest name.
-     */
     if (!customer) {
       customer = {
         id: identity.normalizedPhone || identity.normalizedName,
@@ -117,14 +127,25 @@ export const buildCustomersFromOrders = (orders = []) => {
     }
 
     /*
-     * Keep the latest available customer information.
+     * Keep the most recently dated customer information.
+     *
+     * This prevents an older order from replacing newer
+     * customer information simply because of array order.
      */
-    if (identity.name) {
+    const currentOrderDate = new Date(order.createdAt);
+    const customerLastOrderDate = new Date(customer.lastOrderDate);
+
+    const currentOrderIsNewer =
+      !Number.isNaN(currentOrderDate.getTime()) &&
+      (Number.isNaN(customerLastOrderDate.getTime()) ||
+        currentOrderDate > customerLastOrderDate);
+
+    if (currentOrderIsNewer || !customer.name) {
       customer.name = identity.name;
       customer.normalizedName = identity.normalizedName;
     }
 
-    if (identity.phone) {
+    if (identity.phone && (!customer.normalizedPhone || currentOrderIsNewer)) {
       customer.phone = identity.phone;
       customer.normalizedPhone = identity.normalizedPhone;
     }
@@ -135,14 +156,7 @@ export const buildCustomersFromOrders = (orders = []) => {
     customer.totalPaid += Number(order.amountPaid) || 0;
     customer.outstandingBalance += Number(order.balance) || 0;
 
-    const currentOrderDate = new Date(order.createdAt);
-    const lastOrderDate = new Date(customer.lastOrderDate);
-
-    if (
-      !Number.isNaN(currentOrderDate.getTime()) &&
-      (Number.isNaN(lastOrderDate.getTime()) ||
-        currentOrderDate > lastOrderDate)
-    ) {
+    if (currentOrderIsNewer) {
       customer.lastOrderDate = order.createdAt;
     }
   });
