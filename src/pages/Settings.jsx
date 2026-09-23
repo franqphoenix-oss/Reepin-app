@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useApp } from "../context/useApp";
@@ -49,22 +49,6 @@ const Settings = () => {
   );
 
   const profileInitials = getProfileInitials(settings.profile?.name);
-
-  useEffect(() => {
-    setProfileName(settings.profile.name);
-    setProfileRole(settings.profile.role);
-
-    setBusinessName(settings.business.name);
-    setBusinessPhone(settings.business.phone);
-    setBusinessAddress(settings.business.address);
-
-    setSelectedCurrency(settings.currency);
-
-    setNotificationEnabled(settings.notifications.enabled);
-    setNotificationType(settings.notifications.type);
-    setNotificationFrequency(settings.notifications.frequency);
-    setDefaultLeadTime(settings.notifications.defaultLeadTime);
-  }, [settings]);
 
   // ---------------------------------------------------------
   // PROFILE

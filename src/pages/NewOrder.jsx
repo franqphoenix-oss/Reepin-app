@@ -9,6 +9,8 @@ import { calculatePayment } from "../utils/orderHelpers";
 
 import "./pages-css/NewOrder.css";
 
+const createItemId = () => crypto.randomUUID();
+
 function getNotifyAt(date, time, leadTime) {
   if (!date) {
     return "";
@@ -51,85 +53,58 @@ function NewOrder() {
   const { settings } = useApp();
 
   const isEditMode = Boolean(orderId);
+  const existingOrder = isEditMode ? getOrderById(orderId) : null;
 
-  const [customer, setCustomer] = useState({
-    name: "",
-    phone: "",
-  });
+  const [customer, setCustomer] = useState(
+    () =>
+      existingOrder?.customer || {
+        name: "",
+        phone: "",
+      },
+  );
 
-  const [items, setItems] = useState([
-    {
-      id: crypto.randomUUID(),
-      name: "",
-      quantity: 1,
-      price: "",
-    },
-  ]);
+  const [items, setItems] = useState(() =>
+    existingOrder?.items?.length > 0
+      ? existingOrder.items
+      : [
+          {
+            id: "new-item",
+            name: "",
+            quantity: 1,
+            price: "",
+          },
+        ],
+  );
 
-  const [amountPaid, setAmountPaid] = useState("");
+  const [amountPaid, setAmountPaid] = useState(() =>
+    existingOrder?.amountPaid ? String(existingOrder.amountPaid) : "",
+  );
 
-  const [delivery, setDelivery] = useState({
-    address: "",
-    status: "Pending",
-  });
+  const [delivery, setDelivery] = useState(
+    () =>
+      existingOrder?.delivery || {
+        address: "",
+        status: "Pending",
+      },
+  );
 
-  const [followUp, setFollowUp] = useState({
-    enabled: false,
-    date: "",
-    time: "",
-    reason: "",
-    notify: false,
-    notifyAt: "",
-    completed: false,
-  });
+  const [followUp, setFollowUp] = useState(() => ({
+    enabled: Boolean(existingOrder?.followUp?.enabled),
+    date: existingOrder?.followUp?.date || "",
+    time: existingOrder?.followUp?.time || "",
+    reason: existingOrder?.followUp?.reason || "",
+    notify: Boolean(existingOrder?.followUp?.notify),
+    notifyAt: existingOrder?.followUp?.notifyAt || "",
+    completed: Boolean(existingOrder?.followUp?.completed),
+  }));
 
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState(() => existingOrder?.notes || "");
 
   useEffect(() => {
-    if (!isEditMode) {
-      return;
-    }
-
-    const existingOrder = getOrderById(orderId);
-
-    if (!existingOrder) {
+    if (isEditMode && !existingOrder) {
       navigate("/orders");
-      return;
     }
-
-    setCustomer(existingOrder.customer);
-
-    setItems(
-      existingOrder.items.length > 0
-        ? existingOrder.items
-        : [
-            {
-              id: Date.now(),
-              name: "",
-              quantity: 1,
-              price: "",
-            },
-          ],
-    );
-
-    setAmountPaid(
-      existingOrder.amountPaid ? String(existingOrder.amountPaid) : "",
-    );
-
-    setDelivery(existingOrder.delivery);
-
-    setFollowUp({
-      enabled: Boolean(existingOrder.followUp?.enabled),
-      date: existingOrder.followUp?.date || "",
-      time: existingOrder.followUp?.time || "",
-      reason: existingOrder.followUp?.reason || "",
-      notify: Boolean(existingOrder.followUp?.notify),
-      notifyAt: existingOrder.followUp?.notifyAt || "",
-      completed: Boolean(existingOrder.followUp?.completed),
-    });
-
-    setNotes(existingOrder.notes);
-  }, [isEditMode, orderId, getOrderById, navigate]);
+  }, [existingOrder, isEditMode, navigate]);
 
   const total = items.reduce((sum, item) => {
     const quantity = Number(item.quantity) || 0;
@@ -149,7 +124,7 @@ function NewOrder() {
     setItems([
       ...items,
       {
-        id: Date.now(),
+        id: createItemId(),
         name: "",
         quantity: 1,
         price: "",

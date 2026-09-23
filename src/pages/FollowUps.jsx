@@ -108,7 +108,7 @@ function FollowUps() {
         order.followUp?.enabled &&
         !order.followUp?.completed,
     );
-  }, [safeOrders]);
+  }, [orders]);
 
   const today = useMemo(() => {
     const currentDate = new Date();

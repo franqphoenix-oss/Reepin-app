@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export const AppContext = createContext();
+import { AppContext } from "./AppContextValue";
 
 const STORAGE_KEY = "reepin_app_settings";
 

@@ -1,8 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+import { OrderContext } from "./OrderContextValue";
 import { calculatePayment, normalizeOrder } from "../utils/orderHelpers";
-
-export const OrderContext = createContext();
 
 const STORAGE_KEY = "reepin_orders";
 

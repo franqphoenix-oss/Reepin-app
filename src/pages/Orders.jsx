@@ -61,9 +61,9 @@ function Orders() {
 
       return matchesSearch && matchesFilter;
     });
-  }, [safeOrders, search, activeFilter]);
+  }, [orders, search, activeFilter]);
 
-  const hasOrders = safeOrders.length > 0;
+  const hasOrders = (Array.isArray(orders) ? orders : []).length > 0;
   const hasMatches = filteredOrders.length > 0;
 
   const getCustomer = (order) => {
